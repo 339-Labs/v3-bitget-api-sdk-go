@@ -2,7 +2,6 @@ package v2
 
 import (
 	"github.com/339-Labs/v3-bitget-api-sdk-go/config"
-	"github.com/339-Labs/v3-bitget-api-sdk-go/internal"
 	"github.com/339-Labs/v3-bitget-api-sdk-go/internal/common"
 )
 
@@ -15,8 +14,7 @@ func (p *SpotMarketClient) Init(config *config.BitgetConfig) *SpotMarketClient {
 	return p
 }
 
-func (p *SpotMarketClient) Coins() (string, error) {
-	params := internal.NewParams()
+func (p *SpotMarketClient) Coins(params map[string]string) (string, error) {
 	resp, err := p.BitgetRestClient.DoGet("/api/v2/spot/public/coins", params)
 	return resp, err
 }

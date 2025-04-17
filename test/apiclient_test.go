@@ -15,9 +15,9 @@ import (
 func Test_ContractsV1(t *testing.T) {
 	config := config.NewBitgetConfig(config.BiGetApiKey, config.BiGetApiSecretKey, config.Passphrase, 1000, "")
 	params := internal.NewParams()
-	params["productType"] = "umcbl"
-
-	rsp, err := new(v1.MixMarketClient).Init(config).Contracts(params)
+	params["productType"] = "USDT-FUTURES"
+	cl := new(v2.MixMarketClient).Init(config)
+	rsp, err := cl.Tickers(params)
 	if err != nil {
 		t.Error(err)
 	}
