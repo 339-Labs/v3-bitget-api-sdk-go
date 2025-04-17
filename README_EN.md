@@ -26,66 +26,70 @@ import (
 )
 
 func Test_PlaceOrder(t *testing.T) {
-  client := new(v1.MixOrderClient).Init()
+	config := config.NewBitgetConfig(config.BiGetApiKey, config.BiGetApiSecretKey, config.Passphrase, 1000, "")
+	client := new(v1.MixOrderClient).Init(config)
 
-  params := internal.NewParams()
-  params["symbol"] = "BTCUSDT_UMCBL"
-  params["marginCoin"] = "USDT"
-  params["side"] = "open_long"
-  params["orderType"] = "limit"
-  params["price"] = "27012"
-  params["size"] = "0.01"
-  params["timInForceValue"] = "normal"
+	params := internal.NewParams()
+	params["symbol"] = "BTCUSDT_UMCBL"
+	params["marginCoin"] = "USDT"
+	params["side"] = "open_long"
+	params["orderType"] = "limit"
+	params["price"] = "27012"
+	params["size"] = "0.01"
+	params["timInForceValue"] = "normal"
 
-  resp, err := client.PlaceOrder(params)
-  if err != nil {
-    println(err.Error())
-  }
-  fmt.Println(resp)
+	resp, err := client.PlaceOrder(params)
+	if err != nil {
+		println(err.Error())
+	}
+	fmt.Println(resp)
 }
 
 func Test_post(t *testing.T) {
-  client := new(client.BitgetApiClient).Init()
+	config := config.NewBitgetConfig("", "", "", 1000, "")
+	client := new(client.BitgetApiClient).Init(config)
 
-  params := internal.NewParams()
-  params["symbol"] = "BTCUSDT_UMCBL"
-  params["marginCoin"] = "USDT"
-  params["side"] = "open_long"
-  params["orderType"] = "limit"
-  params["price"] = "27012"
-  params["size"] = "0.01"
-  params["timInForceValue"] = "normal"
+	params := internal.NewParams()
+	params["symbol"] = "BTCUSDT_UMCBL"
+	params["marginCoin"] = "USDT"
+	params["side"] = "open_long"
+	params["orderType"] = "limit"
+	params["price"] = "27012"
+	params["size"] = "0.01"
+	params["timInForceValue"] = "normal"
 
-  resp, err := client.Post("/api/mix/v1/order/placeOrder", params)
-  if err != nil {
-    println(err.Error())
-  }
-  fmt.Println(resp)
+	resp, err := client.Post("/api/mix/v1/order/placeOrder", params)
+	if err != nil {
+		println(err.Error())
+	}
+	fmt.Println(resp)
 }
 
 func Test_get(t *testing.T) {
-  client := new(client.BitgetApiClient).Init()
+	config := config.NewBitgetConfig("", "", "", 1000, "")
 
-  params := internal.NewParams()
-  params["productType"] = "umcbl"
+	client := new(client.BitgetApiClient).Init(config)
+	params := internal.NewParams()
+	params["productType"] = "umcbl"
 
-  resp, err := client.Get("/api/mix/v1/account/accounts", params)
-  if err != nil {
-    println(err.Error())
-  }
-  fmt.Println(resp)
+	resp, err := client.Get("/api/mix/v1/account/accounts", params)
+	if err != nil {
+		println(err.Error())
+	}
+	fmt.Println(resp)
 }
 
 func Test_get_with_params(t *testing.T) {
-  client := new(client.BitgetApiClient).Init()
+	config := config.NewBitgetConfig("", "", "", 1000, "")
+	client := new(client.BitgetApiClient).Init(config)
 
-  params := internal.NewParams()
+	params := internal.NewParams()
 
-  resp, err := client.Get("/api/spot/v1/account/getInfo", params)
-  if err != nil {
-    println(err.Error())
-  }
-  fmt.Println(resp)
+	resp, err := client.Get("/api/spot/v1/account/getInfo", params)
+	if err != nil {
+		println(err.Error())
+	}
+	fmt.Println(resp)
 }
 ```
 
@@ -102,32 +106,33 @@ import (
 
 func TestBitgetWsClient_New(t *testing.T) {
 
-  client := new(ws.BitgetWsClient).Init(true, func(message string) {
-    fmt.Println("default error:" + message)
-  }, func(message string) {
-    fmt.Println("default error:" + message)
-  })
+	config := config.NewBitgetConfig("", "", "", 1000, "")
+	client := new(ws.BitgetWsClient).Init(config,true, func(message string) {
+		fmt.Println("default error:" + message)
+	}, func(message string) {
+		fmt.Println("default error:" + message)
+	})
 
-  var channelsDef []model.SubscribeReq
-  subReqDef1 := model.SubscribeReq{
-    InstType: "UMCBL",
-    Channel:  "account",
-    InstId:   "default",
-  }
-  channelsDef = append(channelsDef, subReqDef1)
-  client.SubscribeDef(channelsDef)
+	var channelsDef []model.SubscribeReq
+	subReqDef1 := model.SubscribeReq{
+		InstType: "UMCBL",
+		Channel:  "account",
+		InstId:   "default",
+	}
+	channelsDef = append(channelsDef, subReqDef1)
+	client.SubscribeDef(channelsDef)
 
-  var channels []model.SubscribeReq
-  subReq1 := model.SubscribeReq{
-    InstType: "UMCBL",
-    Channel:  "account",
-    InstId:   "default",
-  }
-  channels = append(channels, subReq1)
-  client.Subscribe(channels, func(message string) {
-    fmt.Println("appoint:" + message)
-  })
-  client.Connect()
+	var channels []model.SubscribeReq
+	subReq1 := model.SubscribeReq{
+		InstType: "UMCBL",
+		Channel:  "account",
+		InstId:   "default",
+	}
+	channels = append(channels, subReq1)
+	client.Subscribe(channels, func(message string) {
+		fmt.Println("appoint:" + message)
+	})
+	client.Connect()
 }
 
 ```
