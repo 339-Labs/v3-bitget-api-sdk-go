@@ -12,6 +12,32 @@ import (
 	"time"
 )
 
+func Test_ContractsV1(t *testing.T) {
+	config := config.NewBitgetConfig(config.BiGetApiKey, config.BiGetApiSecretKey, config.Passphrase, 1000, "")
+	params := internal.NewParams()
+	params["productType"] = "umcbl"
+
+	rsp, err := new(v1.MixMarketClient).Init(config).Contracts(params)
+	if err != nil {
+		t.Error(err)
+	}
+	fmt.Println(rsp)
+
+}
+
+func Test_Contracts(t *testing.T) {
+	config := config.NewBitgetConfig(config.BiGetApiKey, config.BiGetApiSecretKey, config.Passphrase, 1000, "")
+	params := internal.NewParams()
+	params["productType"] = "umcbl"
+
+	rsp, err := new(v2.MixMarketClient).Init(config).Contracts(params)
+	if err != nil {
+		t.Error(err)
+	}
+	fmt.Println(rsp)
+
+}
+
 func Test_WithdrawalRecords(t *testing.T) {
 
 	config := config.NewBitgetConfig(config.BiGetApiKey, config.BiGetApiSecretKey, config.Passphrase, 1000, "")

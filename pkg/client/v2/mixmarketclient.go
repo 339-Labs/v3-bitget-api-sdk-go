@@ -29,6 +29,11 @@ func (p *MixMarketClient) Ticker(params map[string]string) (string, error) {
 	return resp, err
 }
 
+func (p *MixMarketClient) Tickers(params map[string]string) (string, error) {
+	resp, err := p.BitgetRestClient.DoGet("/api/v2/mix/market/tickers", params)
+	return resp, err
+}
+
 func (p *MixMarketClient) Fills(params map[string]string) (string, error) {
 	resp, err := p.BitgetRestClient.DoGet("/api/v2/mix/market/fills", params)
 	return resp, err
