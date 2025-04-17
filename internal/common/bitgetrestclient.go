@@ -17,9 +17,10 @@ type BitgetRestClient struct {
 	BaseUrl      string
 	HttpClient   http.Client
 	Signer       *Signer
+	SignType     string
 }
 
-func (p *BitgetRestClient) Init() *BitgetRestClient {
+func (p *BitgetRestClient) Init(config *config.BitgetConfig) *BitgetRestClient {
 	p.ApiKey = config.ApiKey
 	p.ApiSecretKey = config.SecretKey
 	p.BaseUrl = config.BaseUrl
@@ -28,6 +29,7 @@ func (p *BitgetRestClient) Init() *BitgetRestClient {
 	p.HttpClient = http.Client{
 		Timeout: time.Duration(config.TimeoutSecond) * time.Second,
 	}
+	p.SignType = config.SignType
 	return p
 }
 
@@ -36,10 +38,10 @@ func (p *BitgetRestClient) DoPost(uri string, params string) (string, error) {
 	//body, _ := internal.BuildJsonParams(params)
 
 	sign := p.Signer.Sign(constants.POST, uri, params, timesStamp)
-	if constants.RSA == config.SignType {
+	if constants.RSA == p.SignType {
 		sign = p.Signer.SignByRSA(constants.POST, uri, params, timesStamp)
 	}
-	requestUrl := config.BaseUrl + uri
+	requestUrl := p.BaseUrl + uri
 
 	buffer := strings.NewReader(params)
 	request, err := http.NewRequest(constants.POST, requestUrl, buffer)
@@ -73,7 +75,6 @@ func (p *BitgetRestClient) DoGet(uri string, params map[string]string) (string, 
 	sign := p.Signer.Sign(constants.GET, uri, body, timesStamp)
 
 	requestUrl := p.BaseUrl + uri + body
-
 	request, err := http.NewRequest(constants.GET, requestUrl, nil)
 	if err != nil {
 		return "", err

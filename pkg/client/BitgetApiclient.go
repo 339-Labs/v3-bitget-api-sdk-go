@@ -1,6 +1,7 @@
 package client
 
 import (
+	"github.com/339-Labs/v3-bitget-api-sdk-go/config"
 	"github.com/339-Labs/v3-bitget-api-sdk-go/internal"
 	"github.com/339-Labs/v3-bitget-api-sdk-go/internal/common"
 )
@@ -9,8 +10,8 @@ type BitgetApiClient struct {
 	BitgetRestClient *common.BitgetRestClient
 }
 
-func (p *BitgetApiClient) Init() *BitgetApiClient {
-	p.BitgetRestClient = new(common.BitgetRestClient).Init()
+func (p *BitgetApiClient) Init(config *config.BitgetConfig) *BitgetApiClient {
+	p.BitgetRestClient = new(common.BitgetRestClient).Init(config)
 	return p
 }
 

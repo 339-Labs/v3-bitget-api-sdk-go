@@ -2,12 +2,14 @@ package main
 
 import (
 	"fmt"
+	"github.com/339-Labs/v3-bitget-api-sdk-go/config"
 	"github.com/339-Labs/v3-bitget-api-sdk-go/internal/model"
 	"github.com/339-Labs/v3-bitget-api-sdk-go/pkg/client/ws"
 )
 
 func main() {
-	client := new(ws.BitgetWsClient).Init(true, func(message string) {
+	config := config.NewBitgetConfig(config.BiGetApiKey, config.BiGetApiSecretKey, config.Passphrase, 1000, "")
+	client := new(ws.BitgetWsClient).Init(config, true, func(message string) {
 		fmt.Println("default error:" + message)
 	}, func(message string) {
 		fmt.Println("default error:" + message)

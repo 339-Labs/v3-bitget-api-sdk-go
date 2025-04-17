@@ -1,12 +1,18 @@
 package v1
 
 import (
+	"github.com/339-Labs/v3-bitget-api-sdk-go/config"
 	"github.com/339-Labs/v3-bitget-api-sdk-go/internal"
 	"github.com/339-Labs/v3-bitget-api-sdk-go/internal/common"
 )
 
 type SpotWalletApi struct {
 	BitgetRestClient *common.BitgetRestClient
+}
+
+func (p *SpotWalletApi) Init(config *config.BitgetConfig) *SpotWalletApi {
+	p.BitgetRestClient = new(common.BitgetRestClient).Init(config)
+	return p
 }
 
 func (p *SpotWalletApi) Transfer(params map[string]string) (string, error) {

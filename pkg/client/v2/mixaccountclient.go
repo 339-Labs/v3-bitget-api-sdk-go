@@ -1,6 +1,7 @@
 package v2
 
 import (
+	"github.com/339-Labs/v3-bitget-api-sdk-go/config"
 	"github.com/339-Labs/v3-bitget-api-sdk-go/internal"
 	"github.com/339-Labs/v3-bitget-api-sdk-go/internal/common"
 )
@@ -9,8 +10,8 @@ type MixAccountClient struct {
 	BitgetRestClient *common.BitgetRestClient
 }
 
-func (p *MixAccountClient) Init() *MixAccountClient {
-	p.BitgetRestClient = new(common.BitgetRestClient).Init()
+func (p *MixAccountClient) Init(config *config.BitgetConfig) *MixAccountClient {
+	p.BitgetRestClient = new(common.BitgetRestClient).Init(config)
 	return p
 }
 

@@ -1,6 +1,7 @@
 package v2
 
 import (
+	"github.com/339-Labs/v3-bitget-api-sdk-go/config"
 	"github.com/339-Labs/v3-bitget-api-sdk-go/internal"
 	"github.com/339-Labs/v3-bitget-api-sdk-go/internal/common"
 )
@@ -9,8 +10,8 @@ type SpotAccountClient struct {
 	BitgetRestClient *common.BitgetRestClient
 }
 
-func (p *SpotAccountClient) Init() *SpotAccountClient {
-	p.BitgetRestClient = new(common.BitgetRestClient).Init()
+func (p *SpotAccountClient) Init(config *config.BitgetConfig) *SpotAccountClient {
+	p.BitgetRestClient = new(common.BitgetRestClient).Init(config)
 	return p
 }
 
