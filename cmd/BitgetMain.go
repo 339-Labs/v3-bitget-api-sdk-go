@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	config := config.NewBitgetConfig(config.BiGetApiKey, config.BiGetApiSecretKey, config.Passphrase, 1000, "")
+	config := config.NewBitgetConfig(config.BiGetApiKey, config.BiGetApiSecretKey, config.Passphrase, 1000, "", "", "")
 	client := new(ws.BitgetWsClient).Init(config, true, func(message string) {
 		fmt.Println("default error:" + message)
 	}, func(message string) {

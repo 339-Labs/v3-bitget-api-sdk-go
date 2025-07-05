@@ -13,7 +13,7 @@ import (
 )
 
 func Test_ContractsV1(t *testing.T) {
-	config := config.NewBitgetConfig(config.BiGetApiKey, config.BiGetApiSecretKey, config.Passphrase, 1000, "")
+	config := config.NewBitgetConfig(config.BiGetApiKey, config.BiGetApiSecretKey, config.Passphrase, 1000, "", "", "")
 	params := internal.NewParams()
 	params["productType"] = "USDT-FUTURES"
 	cl := new(v2.MixMarketClient).Init(config)
@@ -26,7 +26,7 @@ func Test_ContractsV1(t *testing.T) {
 }
 
 func Test_Contracts(t *testing.T) {
-	config := config.NewBitgetConfig(config.BiGetApiKey, config.BiGetApiSecretKey, config.Passphrase, 1000, "")
+	config := config.NewBitgetConfig(config.BiGetApiKey, config.BiGetApiSecretKey, config.Passphrase, 1000, "", "", "")
 	params := internal.NewParams()
 	params["productType"] = "umcbl"
 
@@ -40,7 +40,7 @@ func Test_Contracts(t *testing.T) {
 
 func Test_WithdrawalRecords(t *testing.T) {
 
-	config := config.NewBitgetConfig(config.BiGetApiKey, config.BiGetApiSecretKey, config.Passphrase, 1000, "")
+	config := config.NewBitgetConfig(config.BiGetApiKey, config.BiGetApiSecretKey, config.Passphrase, 1000, "", "", "")
 	params := internal.NewParams()
 	layout := "2006-01-02 15:04:05" // 时间格式模板
 	start := "2025-04-14 18:30:00"
@@ -63,7 +63,7 @@ func Test_WithdrawalRecords(t *testing.T) {
 }
 
 func Test_PlaceOrder(t *testing.T) {
-	config := config.NewBitgetConfig(config.BiGetApiKey, config.BiGetApiSecretKey, config.Passphrase, 1000, "")
+	config := config.NewBitgetConfig(config.BiGetApiKey, config.BiGetApiSecretKey, config.Passphrase, 1000, "", "", "")
 	client := new(v1.MixOrderClient).Init(config)
 
 	params := internal.NewParams()
@@ -83,7 +83,7 @@ func Test_PlaceOrder(t *testing.T) {
 }
 
 func Test_post(t *testing.T) {
-	config := config.NewBitgetConfig("", "", "", 1000, "")
+	config := config.NewBitgetConfig("", "", "", 1000, "", "", "")
 	client := new(client.BitgetApiClient).Init(config)
 
 	params := internal.NewParams()
@@ -103,7 +103,7 @@ func Test_post(t *testing.T) {
 }
 
 func Test_get(t *testing.T) {
-	config := config.NewBitgetConfig("", "", "", 1000, "")
+	config := config.NewBitgetConfig("", "", "", 1000, "", "", "")
 	client := new(client.BitgetApiClient).Init(config)
 
 	params := internal.NewParams()
@@ -117,7 +117,7 @@ func Test_get(t *testing.T) {
 }
 
 func Test_get_with_params(t *testing.T) {
-	config := config.NewBitgetConfig("", "", "", 1000, "")
+	config := config.NewBitgetConfig("", "", "", 1000, "", "", "")
 	client := new(client.BitgetApiClient).Init(config)
 
 	params := internal.NewParams()
@@ -130,7 +130,7 @@ func Test_get_with_params(t *testing.T) {
 }
 
 func Test_get_with_encode_params(t *testing.T) {
-	config := config.NewBitgetConfig("", "", "", 1000, "")
+	config := config.NewBitgetConfig("", "", "", 1000, "", "", "")
 	client := new(client.BitgetApiClient).Init(config)
 
 	params := internal.NewParams()
