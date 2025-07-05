@@ -3,8 +3,8 @@ package main
 import (
 	"fmt"
 	"github.com/339-Labs/v3-bitget-api-sdk-go/config"
-	"github.com/339-Labs/v3-bitget-api-sdk-go/internal/model"
 	"github.com/339-Labs/v3-bitget-api-sdk-go/pkg/client/ws"
+	"github.com/339-Labs/v3-bitget-api-sdk-go/pkg/client/ws/model"
 )
 
 func main() {
